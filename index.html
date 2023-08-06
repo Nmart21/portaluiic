@@ -1,0 +1,613 @@
+<!DOCTYPE html><html lang="en"><head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content>
+        <meta name="author" content>
+
+	 
+<title>UIIC</title>
+  
+       <!-- perevent clickjacking-->
+
+
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+<!-- end perevent clickjacking--> 
+<!-- prevent special characters(*.&)-->
+<script type="text/javascript">
+    window.addEventListener("change", function (event) {
+        if (event && event.target && event.target.value) {
+            if ((event.target.tagName == "INPUT" && event.target.type == "text")
+                || (event.target.tagName == "TEXTAREA" && event.target.type == "textarea")) {
+            	/* if valid number then return */
+            	if(/^[+-]?\d+(\.\d+)?$/.test(event.target.value)) return;
+            	/* if valid email then retrun */
+            	if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value)) return;
+            	/* Bypass engine number, chasis number, financierCode */
+                if(event.target.id=="engineNumber") return;
+                if(event.target.id=="chasisNumber") return;
+                if(event.target.id=="financierCode") return;
+            	const regex = /[\*\.\&]/;
+           	if (regex.test(event.target.value)) {
+   			alert("dot[.], asterisk[*] and ampersand[&] cannot be accepted");
+   			event.target.value = "";
+   		}
+            }
+        }
+    });
+</script>
+<!-- end prevent special characters(*.&)-->
+        
+        
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        
+
+        <link href="css/MainWndStyle1.css" rel="stylesheet" type="text/css" title="styleid" media="all">
+        <link href="css/SubWndStyle.css" rel="stylesheet" type="text/css" title="styleid" media="all">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link href="css/calendar.css" rel="stylesheet" type="text/css">
+        <script src="js/validation.js"></script>
+
+
+<script type="text/javascript" language="javascript">
+function ifIE8()
+                {
+                  if (document.all && document.querySelector && !document.addEventListener) {
+                        alert('Current Browser Version is below IE9. This web site is best viewed with Internet Explorer 9 or higher');
+                    }
+                }
+function disableBackButton()
+                            {
+                                window.history.forward();
+                            }
+setTimeout("disableBackButton()", 0);
+
+</script>
+<script type="text/javascript">
+function kycVerify(transId,url){
+	var url= url+"="+transId;
+	//alert(url);
+	window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=1000,height=500");
+}
+		
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			$("form").attr('autocomplete', 'off'); // Switching form autocomplete attribute to off
+		});
+		
+	</script>
+</head>
+
+<body onload="ifIE8()">
+<div class="container">
+
+        <div class="panel panel-success">
+			
+                          <div class=" logotablebg">
+
+                            <div class="row">
+
+                                    <div class="col-md-1">
+                                         
+                                    </div>
+                                    
+                                    <div class="col-md-10">
+                                        <img class="visible-lg visible-md img-responsive" alt="UIIC" src="images/1.jpg">
+                                             <img class="visible-xs  visible-sm img-responsive" alt="UIIC" src="images/1.jpg">
+                                    </div>
+
+                                    <div class="col-md-1">
+                                         
+                                    </div>
+
+                            </div>
+
+                          </div>
+            <div class="panel-body bluebox">
+
+
+        
+        <script type="text/javascript">
+		
+
+            function toupper(id,evt){
+                document.getElementById(id).value=document.getElementById(id).value.toUpperCase();
+            }
+             $(document).ready(function() {
+
+                            $(document).attr("title", "UIIC - Policy Verification");
+
+
+             $('.email').editable({
+                type: 'text',
+
+                url: '../tb/updateCustomerData.do',
+                title: 'Enter Email',
+                validate: function(value) {
+                    if($.trim(value) == '') {
+                        return 'This field is required';
+                    }else if(!isValidEmailAddress($.trim(value)))
+                    {
+                       return 'Enter Valid Email';
+                    }
+                },
+                success: function(response, newValue) {
+                var parsedData = JSON.parse(response);
+
+
+                    if(parsedData.status == 'error')
+                        {
+                          return parsedData.msg; //msg will be shown in editable form
+                        }
+                },
+                error: function(response, newValue) {
+                     var parsedData1 = JSON.parse(response);
+                    if(parsedData1.status === 500) {
+                        return 'Service unavailable. Please try later.';
+                    } else {
+                        return parsedData1.responseText;
+                    }
+                }
+
+            });
+
+             $('.mobile').editable({
+
+                type: 'text',
+
+                url: '../tb/updateCustomerData.do',
+                title: 'Enter Mobile',
+                validate: function(value) {
+                    if($.trim(value) == '') {
+
+                        return 'This field is required';
+                    }else if(!validatePhone($.trim(value)))
+                    {
+
+                       return 'Enter Valid Mobile Number';
+                    }
+                },
+                success: function(response, newValue) {
+                var parsedData = JSON.parse(response);
+
+
+                    if(parsedData.status == 'error')
+                        {
+                          return parsedData.msg; //msg will be shown in editable form
+                        }
+                },
+                error: function(response, newValue) {
+                     var parsedData1 = JSON.parse(response);
+                    if(parsedData1.status === 500) {
+                        return 'Service unavailable. Please try later.';
+                    } else {
+                        return parsedData1.responseText;
+                    }
+                }
+            });
+
+
+
+
+             });
+
+     function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        return pattern.test(emailAddress);
+    }
+
+   function validatePhone(txtPhone) {
+
+    var filter = /^[0-9-+]+$/;
+    if (txtPhone.length == 10 && filter.test(txtPhone)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+        </script>
+        <style type="text/css">
+            BODY{
+                scrollbar-base-color: #D1E0DF;
+                scrollbar-arrow-color: #67724B;
+                scrollbar-DarkShadow-Color:#67724B;
+            }
+             .center
+             {
+             text-align:center !important;
+             }
+
+        </style>
+
+        <link href="css/calendar.css" rel="stylesheet" type="text/css">
+        <script language="javascript" src="js/calendar_gc_customer.js"></script>
+        <link href="css/bootstrap-editable.css" rel="stylesheet">
+        <script src="js/bootstrap-editable.js"></script>
+
+        <form name="PolicyVerificationFormBeanQR" method="post" action="/GCWebPortal/tb/PolicyVerificationQR.do;jsessionid=0CEDDE0ACAF510EA71E0FAB5B3D4377F.tomcat3" style="PolicyVerification">
+
+
+
+         <div class="row divSpacing">
+                <div class="col-md-10 col-sm-offset-1">
+                   
+
+
+
+<div class="errorMsg">
+<ul>
+
+</ul>
+</div>
+                </div>
+        </div>
+
+
+
+            
+
+                                        
+
+                                           <!--  <div class="row divSpacing">
+                                               <div class="col-md-2 col-sm-offset-5 center" style="font-size:17px;"> -->
+                                               
+                                                   <!--  <input type="submit" name="Home" Value="Close" class="btn btn-primary"   style="height:35px" > -->
+                                               
+                                               <!-- </div> -->
+                                              <!--  <div class="col-md-2"> -->
+                                                
+                                              <!--  </div>
+                                               <div class="col-md-2 center" style="font-size:17px;"> -->
+                                               
+                                                 
+                                               
+                                          <!--   </div>
+                                            </div> --> 
+                                            
+                                          <center>
+                                          
+                                          </center>
+
+                                         
+                                         
+
+                                        <br>
+                                        
+                                        
+
+                                        
+                                            
+                                            <center>
+                                               <div class="table-responsive-md" style="width:85%" align="center">
+                                               <table class="table table-bordered table-striped" bgcolor="#01DFD7">
+                                                                                                        
+                                              
+                                               
+                                               </table>
+                                               
+                                                <table class="table table-bordered table-striped" bgcolor>
+                                                <tbody>
+                                               		<tr height="20px" style="background-color:#FFBF00">
+                                               		<td colspan="3">
+                                               		
+                                               		
+                                               		<!-- <div style="font-weight: 1000; font-size:200%;">
+                                               		<img src="../asset/images/ui_bak.jpg" alt="UIIC LOGO" class="imgLen" height="50" width="60" style="margin-right:10%"/>
+                                               		United India Insurance Co. Ltd
+                                               		</div> -->
+                                               		
+                                               		
+                                               		</td>
+                                               		</tr>
+                                               		<tr>
+                                               		<th align="center" width="280px"><center>Policy Issuing Office</center></th>
+                                               		
+                                               		<td style="font-weight:900">290401-BO BALOTRA</td>
+                                               		</tr>
+                                               		<tr height="20px" style="background-color:#feffb0"><td colspan="3"><center><div style="font-weight:900;font-color:black;font-family:Arial;font-size:14px">Policy Details</div></center></td></tr>
+
+                                                     <tr>
+                                                     <th align="center">Policy Type</th>
+                                                     <td style="font-weight:900">COMMERCIAL VEHICLES - PASSENGER - LIABILITY ONLY POLICY</td>
+                                                     </tr>
+                                                     <tr>
+                                                     
+                                                        <th align="center"><span style="color: ;">Policy No.</span></th>
+                                                        
+                                                        
+                                                         
+                                                         <td>
+                                                         	 
+                                                       
+                                                        <div class="label3" style="font-weight:900">2904013123P103217850</div>
+                                                        
+                                                        
+                                                         </td>
+                                                         </tr>
+
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Policy Start Date</span></th>
+                                                        <td><div class="label3" style="font-weight:900">25/06/2023</div></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <th align="center"><span style="color: ;">Policy Expiry Date</span></th>
+                                                         <td><div class="label3" style="font-weight:900">24/06/2024</div></td>
+                                                        </tr>
+                                                        
+                                                        
+                                                			
+                                                		
+                                                        
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Net Premium</span></th>
+                                                        <td style="font-weight:900">Rs. 34564</td>
+                                                       </tr>
+                                                       <tr>
+                                                       <th align="center"><span style="color: ;">GST Amount</span></th>
+                                                        <td style="font-weight:900">Rs. 6222</td>
+                                                       </tr>
+                                                      
+                                                       <tr>
+                                                       <th align="center"><span style="color: ;">Total Premium</span></th>
+                                                        <td style="font-weight:900">Rs.40786</td>
+                                                       </tr>
+														 
+
+                                                       <tr>
+                                                       <th align="center"><span style="color: ;">Mode Of Payment</span></th>
+                                                        <td style="font-weight:900"><strong>PAYMENT GATEWAY - PAYTM</strong></td>
+                                                       </tr>
+                                                       <tr>
+                                                       <th align="center"><span style="color: ;">Policy Status</span></th>
+                                                        <td>
+														
+													
+                                                      		
+                                                      				<div class="label3" style="color:green;font-weight:bold">Active</div>
+                                                      		
+                                                      		
+                                                         
+                                                         
+                                                        </td>
+                                                       </tr>
+														<tr height="20px"><td colspan="3" style="background-color:#7ec74a"><center><div style="font-weight:900;font-color:black;font-family:Arial;font-size:14px">Customer Details</div></center></td></tr>
+														<tr>
+                                                       <th align="center"><span style="color: ;">Customer Name</span></th>
+                                                       <td style="font-weight:900"><div class="label3">MR LOKENDRA SINGH</div></td>
+                                                        </tr>
+                                                       <tr>
+                                                       <th align="center"><span style="color: ;">Customer Id</span></th>
+                                                       <td style="font-weight:900">23059478879</td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Mobile No</span></th>
+                                                        <td style="font-weight:900">9414270738</td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">E mail Id</span></th>
+                                                       <td style="font-weight:900"></td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">GST Reg. No</span></th>
+                                                       <td style="font-weight:900"></td>
+                                                        </tr>
+                                                        
+                                                         
+                                                        <tr height="20px"><td colspan="3" style="background-color:#e6a17a"><center><div style="font-weight:900;font-color:black;font-family:Arial;font-size:14px">Vehicle Details</div></center></td></tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Vehicle Class</span></th>
+                                                       <td style="font-weight:900">C2 PCV 4 Wheeler exceeding 6 or 3 Wheeler exceeding 17</td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Vehicle Make</span></th>
+                                                       <td style="font-weight:900">LP407/31MS497SP BS-II</td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Vehicle Model</span></th>
+                                                       <td style="font-weight:900">LP407/31MS497SP</td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Vehicle Reg. No</span></th>
+                                                       <td style="font-weight:900">RJ04GB2700</td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Date Of Registration</span></th>
+                                                       <td style="font-weight:900">17/08/2011</td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Vehicle Engine No</span></th>
+                                                       <td style="font-weight:900">497SPTC36AZY601164</td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Vehicle Chassis No</span></th>
+                                                       <td style="font-weight:900">MAT357263A8A01696</td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Seating Capacity /GVW</span></th>
+                                                       <td style="font-weight:900">24</td>
+                                                        </tr>
+                                                        <tr>
+                                                       <th align="center"><span style="color: ;">Vehicle IDV</span></th>
+                                                       <td style="font-weight:900">Rs. 0</td>
+                                                        </tr>  
+                                                                                              
+                                                    
+                                                    <tr>
+                                                       
+                                                        
+                                                        
+                                                                                                            
+                                                   
+                                                     
+                                                      
+                                                        
+                                                       
+                                                       
+                                                      
+                                                       
+                                                       
+                                                        
+                                                        
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                </div>
+												</center>
+                                                
+
+                                            
+                                        
+                                        
+
+                                    
+
+                                        
+                                     <!--    <div class="row divSpacing">
+                                             <div class="col-md-10 col-sm-offset-2 center">
+                                               <div>
+                                                    <font face="Verdana">
+                                                    <div align="left"><b><ul><li type="square">TO VERIFY YOUR TATA/TOYOTA POLICIES CLICK <a href="https://portal.uiic.in/CUSTOMERPORTAL/oem_pol_dtls.html" target="_blank">HERE</a></li></ul></b></div>
+                                                </font>
+                                               </div>
+                                            </div>
+                                        </div>
+ -->
+
+
+                                    
+
+                                      <div class="row divSpacing">
+                                             <div class align="center">
+                                               <div style="background-color:#FFBF00;width:68%;height:20%">
+                                               
+                                                <font face="Verdana">
+                                                
+                                                    <div align="center" style="font-weight:bold;font-size:150%">Click <font color="red">@</font> <a href="../CoreCustomerScheduleEncrypt.do?strParam=R0NfU2NoZWR1bGV8TXVsdGkgUGFnZXwyOTA0MDEzMTIzUDEwMzIxNzg1MHxNYWlsfDIwMjMwNjI0MjI4ODEyNnw0">Policy 2904013123P103217850</a> to download the Policy</div>
+                                                </font>
+                                                
+                                                    <!-- <font face="Verdana">
+                                                    <div align="left"><b><ul><li>Kindly verify the validity of your policy using the above facility.</li></ul></b></div>
+                                                </font> -->
+                                                
+                                               </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row divSpacing">
+                                             <div align="center">
+                                               <div>
+                                                    <font face="Verdana">
+                                                   <!--  <div align="center"><font face="Verdana">Note : If any policy number is found to be invalid kindly cross check with policy issuing office printed on the policy document for confirmation of the same, and also intimate by email to <a href="mailto:customercare@uiic.co.in" target="_top">customercare@uiic.co.in</a></font></div> -->
+                                                </font>
+                                               </div>
+                                            </div>
+                                        </div>
+
+
+        </form>
+
+
+
+
+<div id="mask"></div>
+
+
+
+
+<div class="row divSpacing">
+
+                    <div class="col-md-5">
+                         
+                    </div>
+
+                    <div class="col-md-7">
+                        <span class="tdfooter">
+                        <font face="Verdana">2010 United India Insurance Company Ltd.</font>
+                          <a href="http://uiic.co.in/download.jsp" target="_blank"></a>
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="row divSpacing">
+
+                    <div class="col-md-3">
+                         
+                    </div>
+
+                    <div class="col-md-9">
+                        <span class="tdfooter">
+                            <font face="Verdana">For Mozila best viewed in </font> <font color="#FF0000">version 3.5</font> and above  and
+                            <font face="Verdana">For Google Chrome best viewed in </font> <font color="#FF0000">version 7.0</font> and above
+                        </span>
+                    </div>
+
+                </div>
+
+</div>
+                <div id="footer" style="color:#EFEFEF;padding:3px 0 0 0;">
+                   Developed & Maintained By TCS
+                   
+                </div>
+		</div>
+	</div>
+
+
+    <table id="calenderTable">
+        <tbody id="calenderTableHead">
+          <tr>
+            <td colspan="4" align="center">
+	          <select onchange="showCalenderBody(createCalender(document.getElementById('selectYear').value,
+	           this.selectedIndex, false));" id="selectMonth">
+	              <option value="0">Jan</option>
+	              <option value="1">Feb</option>
+	              <option value="2">Mar</option>
+	              <option value="3">Apr</option>
+	              <option value="4">May</option>
+	              <option value="5">Jun</option>
+	              <option value="6">Jul</option>
+	              <option value="7">Aug</option>
+	              <option value="8">Sep</option>
+	              <option value="9">Oct</option>
+	              <option value="10">Nov</option>
+	              <option value="11">Dec</option>
+	          </select>
+            </td>
+            <td colspan="2" align="center">
+			    <select onchange="showCalenderBody(createCalender(this.value,
+				document.getElementById('selectMonth').selectedIndex, false));" id="selectYear">
+				</select>
+			</td>
+            <td align="center">
+			    <a href="#" onclick="closeCalender();"><font color="#003333" size="+1">X</font></a>
+			</td>
+		  </tr>
+       </tbody>
+       <tbody id="calenderTableDays">
+         <tr style>
+           <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td>
+         </tr>
+       </tbody>
+       <tbody id="calender"></tbody>
+    </table>
+
+
+    <div id="mask"></div>
+    
+
+</body></html>

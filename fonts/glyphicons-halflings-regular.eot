@@ -1,0 +1,162 @@
+
+
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<title>United India Insurance Company LTD</title>
+
+
+
+<link href="../css/MainWndStyle.css" rel="stylesheet" type="text/css">
+<link href="../css/SubWndStyle_1.css" rel="stylesheet" type="text/css">
+
+  <script language="javascript">
+
+
+  function closeMe()
+{
+//var win = window.open("","_self"); /* url = "" or "about:blank"; target="_self" */
+
+var win=window.open("about:blank","_self");
+win.close();
+
+}
+  </script>
+<style type="text/css">
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 37px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 27px;
+  width: 8px;
+  height: 8px;
+  border-radius: 75%;
+  background: rgb(237, 24, 193);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 6px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 6px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 26px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 45px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(19px, 0);
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<table width="952p" align="center" cellpadding="0" cellspacing="0">  <!-- 952p-->
+<tr>
+<td class="tdimg" style="padding-left:80px"><img src="../images/1_1.jpg" border="0"></td>
+
+
+
+</tr>
+</table>
+
+<table width="952p" align="center" cellpadding="0" cellspacing="0">
+<tr><td>
+<div class="bodytable" style="width:100%">
+<center>
+<br>  <br>  <br>
+
+
+
+<div>
+<h2 style="color:#FF0000"><span>Page Not Found!!</span></h2>
+<!-- Start Content List Here-->
+<div style="margin-left:16px;" class="contBlock">
+<span style="font-size: 21px; color: rgb(0, 0, 0); margin-bottom: 7px; margin-left: -2px; display: block; line-height: 1.35em;">We’re sorry but this page may not exist. </span>
+<p style="width: 555px;"><span style="font-size: 13px;" class="pLineHeight">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable. </span></p>
+</div>
+</div>
+
+  
+  
+
+
+ <br>  <br>
+
+<form method="POST" name="errorForm" action="error.jsp">
+
+
+
+<input type="submit" name="exit" id="exit" value="Close" class="homebutton">
+
+</form>
+
+<br>  <br>  <br> 
+
+ <div class="loginError" id="loginError" style="text-align:center;font-size: 17px;color: #1b1ad9fc;font-weight: bold;">
+                    For any queries send mail to tcs[dot]agentdealersupport[at]uiic[dot]co[dot]in
+                </div>
+
+ <br>  <br>  <br>
+
+</center>
+
+
+
+<table width="100%" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td class="tdfooter" style="width:100%">
+<p align="center">
+<font face="Verdana">
+2010 United India Insurance Company Ltd. <a href="http://uiic.co.in/downloads" target="_blank">Downloads</a>
+</font>
+</p>
+</td>
+</tr>
+</table>
+<div id="footer" style="width:100%"></div>
+
+</div>
+</td></tr>
+</table>
+
+
+</body>
+</html>
+
